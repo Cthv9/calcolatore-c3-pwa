@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolatore Valore C3</title>
+    <link rel="manifest" href="manifest.json">
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(reg => console.log('Service Worker registrato', reg))
+                .catch(err => console.log('Errore Service Worker', err));
+        }
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            max-width: 400px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        input, button {
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Calcolatore Valore C3</h2>
+        <label for="timeToReduce">Tempo per ridurre velocità (minuti):</label>
+        <input type="number" id="timeToReduce" placeholder="Inserisci il tempo" min="0" step="0.1">
+        <button onclick="calculateC3()">Calcola C3</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateC3() {
+            let timeToReduce = parseFloat(document.getElementById('timeToReduce').value);
+            if (isNaN(timeToReduce) || timeToReduce <= 0) {
+                document.getElementById('result').innerHTML = "Inserisci un valore valido.";
+                return;
+            }
+            let c3 = timeToReduce;
+            let verificationTime = c3 * 6;
+            document.getElementById('result').innerHTML = `Valore C3: ${c3} minuti<br>Tempo per il test: ${verificationTime} minuti`;
+        }
+    </script>
+</body>
+</html>
